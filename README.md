@@ -17,6 +17,21 @@
 
 ## 一、配置settings.ini文件
 在当前目录下配置settings.ini文件中的fofa.email、fofa.key以及secretKey
-![image](./static/help.png)
+```
+fofa.email=xxxx
+fofa.key=xxxx
+secretKey=code4thsec
+```
+其中fofa.email、fofa.key从FOFA个人页中获取
+secretKey配置任意字符即可（用于接口密钥ak验证，防止外部人员调用查询接口）
 
-![image](./static/exp.png)
+## 二、启动jar运行文件
+在jar运行文件目录下配置好settings.ini后，使用如下命令运行
+```
+java -jar fofamap-server-0.0.1-SNAPSHOT.jar
+```
+![image](https://ice.frostsky.com/2024/08/18/068ab46361225c3ca86b2b96f9cb789f.png)
+运行后会在目录下生成ak.txt，共生成30个用于接口调用传参的接口密钥ak
+
+示例
+![image](https://ice.frostsky.com/2024/08/18/fc28037f1d8c430877296c76d3cdf610.png)
