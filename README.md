@@ -70,17 +70,13 @@ java -jar fofamap-server-0.0.1-SNAPSHOT.jar
 *********
 
 
-<p align="center">
-  本工具由Code4th安全团队开发维护
-  <img src="https://ice.frostsky.com/2024/08/18/5559fc7abc47065e9e5e53a7dba2142b.jpeg">
-</p>
+
+
+**本工具由Code4th安全团队开发维护**
+![image](https://ice.frostsky.com/2024/08/18/5559fc7abc47065e9e5e53a7dba2142b.jpeg)
 
 **团队公开群**
-
-<p align="center">
-  本工具由Code4th安全团队开发维护
-  <img src="https://ice.frostsky.com/2024/08/18/266dd331939779e83cb1ffe84a0e7500.png" width="720" height="1280" alt="公开群">
-</p>
+- QQ群一群（772375860）
 
 # 历史Star
 
