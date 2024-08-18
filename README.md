@@ -3,7 +3,7 @@
   <br>
 </h1>
 
-![image](https://ice.frostsky.com/2024/08/18/119878917a6a43ddc4fdb94e4f5e2541.jpeg)
+![image](https://ice.frostsky.com/2024/08/18/ba6436748b8cf2014bd5f6d43d86a821.jpeg)
 
 <p align="center">
 <a href="https://github.com/youki992/VscanPlus/issues"><img src="https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat"></a>
