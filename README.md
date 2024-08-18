@@ -31,7 +31,19 @@ secretKey配置任意字符即可（用于接口密钥ak验证，防止外部人
 java -jar fofamap-server-0.0.1-SNAPSHOT.jar
 ```
 ![image](https://ice.frostsky.com/2024/08/18/068ab46361225c3ca86b2b96f9cb789f.png)
-运行后会在目录下生成ak.txt，共生成30个用于接口调用传参的接口密钥ak
+后端服务运行在本地**http://127.0.0.1:83**
 
-示例
-![image](https://ice.frostsky.com/2024/08/18/fc28037f1d8c430877296c76d3cdf610.png)
+运行后会在目录下生成ak.txt，共生成30个用于接口调用传参的接口密钥ak，示例：
+![image](https://ice.frostsky.com/2024/08/18/d07950e6d7772abc19754f29fc3058b0.png)
+
+## 三、访问前端页面查询
+访问index.html文件（发布版本index.html文件、css文件和js文件都在html.zip压缩包中）
+输入上一步生成的任意一个ak值用于验证身份，查询参数对应如下
+```
+查询字符串 - qbase64
+页码 - page
+每页显示数量 - size
+字段列表 - fileds
+```
+![image](https://ice.frostsky.com/2024/08/18/81165d00768fe6dca7a22cddefc8ad8d.png)
+
