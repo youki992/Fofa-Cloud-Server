@@ -41,7 +41,7 @@ java -jar fofamap-server-0.0.1-SNAPSHOT.jar
 ## 三、访问前端页面查询
 访问index.html文件（发布版本index.html文件、css文件和js文件都在html.zip压缩包中）
 
-输入上一步生成的任意一个ak值用于验证身份，查询参数对应如下
+在AK中输入上一步生成的任意一个ak值用于验证身份，查询参数对应如下
 ```
 查询字符串 - qbase64 (即FOFA查询语法)
 页码 - page
@@ -55,7 +55,7 @@ java -jar fofamap-server-0.0.1-SNAPSHOT.jar
 ![image](https://ice.frostsky.com/2024/08/18/01d50e9d085dfde6f69972cab0756cb0.png)
 
 # 附录
-- 已支持跨域请求
+[+] 已支持跨域请求
 
 ****************************
 
@@ -68,8 +68,6 @@ java -jar fofamap-server-0.0.1-SNAPSHOT.jar
 **本程序不得用于商业用途，仅限学习交流**
 
 *********
-
-
 
 
 **本工具由Code4th安全团队开发维护**
