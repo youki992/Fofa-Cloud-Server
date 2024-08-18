@@ -71,4 +71,4 @@ java -jar fofamap-server-0.0.1-SNAPSHOT.jar
 
 **本工具由Code4th安全团队开发维护**
 
-![image](https://ice.frostsky.com/2024/08/18/fcf554358458323df11fcdbc676399a0.png)
+![image](https://i.mij.rip/2024/08/18/fcf554358458323df11fcdbc676399a0.png)
