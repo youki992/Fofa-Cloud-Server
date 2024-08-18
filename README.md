@@ -38,12 +38,19 @@ java -jar fofamap-server-0.0.1-SNAPSHOT.jar
 
 ## 三、访问前端页面查询
 访问index.html文件（发布版本index.html文件、css文件和js文件都在html.zip压缩包中）
+
 输入上一步生成的任意一个ak值用于验证身份，查询参数对应如下
 ```
-查询字符串 - qbase64
+查询字符串 - qbase64 (即FOFA查询语法)
 页码 - page
 每页显示数量 - size
-字段列表 - fileds
+字段列表 - fileds (至少选择两个字段)
 ```
 ![image](https://ice.frostsky.com/2024/08/18/81165d00768fe6dca7a22cddefc8ad8d.png)
 
+查询完成后，可以点击导出按钮，导出EXCEL表格
+![image](https://ice.frostsky.com/2024/08/18/cd4d5b10acc19eacfb47e2537c7534c5.png)
+![image](https://ice.frostsky.com/2024/08/18/01d50e9d085dfde6f69972cab0756cb0.png)
+
+# 备注
+- 已支持跨域请求
