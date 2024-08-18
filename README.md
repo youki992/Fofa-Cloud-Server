@@ -60,12 +60,15 @@ java -jar fofamap-server-0.0.1-SNAPSHOT.jar
 ****************************
 
 **本工具仅提供给安全测试人员进行安全自查使用**
+
 **用户滥用造成的一切后果与作者无关**
+
 **使用者请务必遵守当地法律**
+
 **本程序不得用于商业用途，仅限学习交流**
 
 *********
 
 **本工具由Code4th安全团队开发维护**
 
-<img width="318" alt="image" src="https://ice.frostsky.com/2024/08/18/fcf554358458323df11fcdbc676399a0.png">
+![image](https://ice.frostsky.com/2024/08/18/fcf554358458323df11fcdbc676399a0.png)
