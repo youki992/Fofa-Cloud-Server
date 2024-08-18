@@ -3,7 +3,7 @@
   <br>
 </h1>
 
-![image]([https://./](https://mjj.today/i/j2NEt4))
+![image](https://mjj.today/i/j2NEt4)
 
 <p align="center">
 <a href="https://github.com/youki992/VscanPlus/issues"><img src="https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat"></a>
