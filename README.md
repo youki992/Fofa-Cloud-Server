@@ -6,10 +6,10 @@
 ![image](https://ice.frostsky.com/2024/08/18/ba6436748b8cf2014bd5f6d43d86a821.jpeg)
 
 <p align="center">
-<a href="https://github.com/youki992/VscanPlus/issues"><img src="https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat"></a>
-<a href="https://github.com/youki992/VscanPlus"><img alt="Release" src="https://img.shields.io/badge/LICENSE-BSD-important"></a>
-<a href="https://github.com/youki992/VscanPlus/releases"><img src="https://img.shields.io/github/release/youki992/VscanPlus"></a>
-<a href="https://github.com/youki992/VscanPlus/releases"><img src="https://img.shields.io/github/downloads/youki992/VscanPlus/total?color=blueviolet"></a>
+<a href="https://github.com/youki992/Fofa-Cloud-Server/issues"><img src="https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat"></a>
+<a href="https://github.com/youki992/Fofa-Cloud-Server"><img alt="Release" src="https://img.shields.io/badge/LICENSE-BSD-important"></a>
+<a href="https://github.com/youki992/Fofa-Cloud-Server/releases"><img src="https://img.shields.io/github/release/youki992/VscanPlus"></a>
+<a href="https://github.com/youki992/Fofa-Cloud-Server/releases"><img src="https://img.shields.io/github/downloads/youki992/VscanPlus/total?color=blueviolet"></a>
 </p>
 
 # 使用说明
@@ -54,7 +54,7 @@ java -jar fofamap-server-0.0.1-SNAPSHOT.jar
 ![image](https://ice.frostsky.com/2024/08/18/cd4d5b10acc19eacfb47e2537c7534c5.png)
 ![image](https://ice.frostsky.com/2024/08/18/01d50e9d085dfde6f69972cab0756cb0.png)
 
-# 备注
+# 附录
 - 已支持跨域请求
 
 ****************************
@@ -69,6 +69,15 @@ java -jar fofamap-server-0.0.1-SNAPSHOT.jar
 
 *********
 
+
 **本工具由Code4th安全团队开发维护**
 
-![image](https://i.mij.rip/2024/08/18/fcf554358458323df11fcdbc676399a0.png)
+![image](https://ice.frostsky.com/2024/08/18/5559fc7abc47065e9e5e53a7dba2142b.jpeg)
+
+**团队公开群**
+
+![image](https://ice.frostsky.com/2024/08/18/266dd331939779e83cb1ffe84a0e7500.png)
+
+# 历史Star
+
+[![Star History Chart](https://api.star-history.com/svg?repos=youki992/Fofa-Cloud-Server&type=Date)](https://star-history.com/#youki992/Fofa-Cloud-Server)
