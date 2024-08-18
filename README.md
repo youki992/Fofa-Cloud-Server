@@ -79,6 +79,10 @@ java -jar fofamap-server-0.0.1-SNAPSHOT.jar
 **团队公开群**
 - QQ群一群（772375860）
 
+**团队内部知识大陆**
+
+![image](https://ice.frostsky.com/2024/08/18/bea40903e13c5ae238926338dd3b5331.png)
+
 # 历史Star
 
 [![Star History Chart](https://api.star-history.com/svg?repos=youki992/Fofa-Cloud-Server&type=Date)](https://star-history.com/#youki992/Fofa-Cloud-Server)
