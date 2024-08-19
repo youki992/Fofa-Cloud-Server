@@ -8,8 +8,8 @@
 <p align="center">
 <a href="https://github.com/youki992/Fofa-Cloud-Server/issues"><img src="https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat"></a>
 <a href="https://github.com/youki992/Fofa-Cloud-Server"><img alt="Release" src="https://img.shields.io/badge/LICENSE-BSD-important"></a>
-<a href="https://github.com/youki992/Fofa-Cloud-Server/releases"><img src="https://img.shields.io/github/release/youki992/VscanPlus"></a>
-<a href="https://github.com/youki992/Fofa-Cloud-Server/releases"><img src="https://img.shields.io/github/downloads/youki992/VscanPlus/total?color=blueviolet"></a>
+<a href="https://github.com/youki992/Fofa-Cloud-Server/releases"><img src="https://img.shields.io/github/release/youki992/Fofa-Cloud-Server"></a>
+<a href="https://github.com/youki992/Fofa-Cloud-Server/releases"><img src="https://img.shields.io/github/downloads/youki992/Fofa-Cloud-Server/total?color=blueviolet"></a>
 </p>
 
 # 使用说明
