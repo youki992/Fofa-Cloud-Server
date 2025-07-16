@@ -52,7 +52,7 @@ java -jar fofamap-server-0.0.1-SNAPSHOT.jar
 ```
 ![image](https://ice.frostsky.com/2024/08/18/81165d00768fe6dca7a22cddefc8ad8d.png)
 
-新版以画像形式聚会查询信息，效果如下
+新版以画像形式聚合查询信息，效果如下
 [![pV147Cj.png](https://s21.ax1x.com/2025/07/16/pV147Cj.png)](https://imgse.com/i/pV147Cj)
 
 查询完成后，可以点击导出按钮，导出EXCEL表格
