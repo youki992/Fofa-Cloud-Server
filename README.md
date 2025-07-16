@@ -58,6 +58,7 @@ java -jar fofamap-server-0.0.1-SNAPSHOT.jar
 
 # 附录
 [+] 已支持跨域请求
+[+] 支持结果导出
 
 ****************************
 
@@ -72,16 +73,9 @@ java -jar fofamap-server-0.0.1-SNAPSHOT.jar
 *********
 
 
-**本工具由Code4th安全团队开发维护**
+**本工具由C4安全团队开发维护**
 
 ![image](https://ice.frostsky.com/2024/08/18/5559fc7abc47065e9e5e53a7dba2142b.jpeg)
-
-**团队公开群**
-- QQ群一群（772375860）
-
-**团队内部知识大陆**
-
-![image](https://ice.frostsky.com/2024/08/18/bea40903e13c5ae238926338dd3b5331.png)
 
 # 历史Star
 
