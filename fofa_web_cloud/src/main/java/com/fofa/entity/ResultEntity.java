@@ -23,6 +23,12 @@ public class ResultEntity {
     @ExcelProperty(value = "标题")
     String title;
 
+    @ExcelProperty(value = "网站server")
+    String server;
+
+    @ExcelProperty(value = "区域")
+    String region;
+
     @ExcelProperty(value = "所在城市")
     String city;
 }
