@@ -1,208 +1,242 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>Fofa Cloud Server</title>
+    <title>Fofa Cloud Server – 卡片视图</title>
+    <!-- 建议下载到本地使用，避免 CDN 失效 -->
     <link rel="stylesheet" href="bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://unpkg.com/xlsx@0.17.0/dist/xlsx.full.min.js"></script>
+    <style>
+        body{background-color:#f8f9fa}
+        .container{max-width:1200px;margin-top:30px}
+        .card{box-shadow:0 .15rem .75rem rgba(0,0,0,.05);border-radius:.5rem;margin-bottom:1.5rem}
+        .ip-block{
+            width:100px;background:#007bff;color:#fff;font-weight:bold;font-size:1.1rem;
+            border-radius:.25rem;padding:10px 0;
+        }
+        .pagination-container{display:flex;justify-content:center;margin-top:20px}
+        .result-card:hover{transform:translateY(-3px);transition:.2s}
+        .text-truncate{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    </style>
 </head>
+
 <body>
 <div class="container">
-    <h1 class="mt-4">Fofa Cloud Server</h1>
-    <form id="fofaForm">
-        <div class="form-group">
-            <label for="akInput">AK (Access Key):</label>
-            <input type="text" class="form-control" id="akInput" name="ak" placeholder="请输入AK" required>
-            <small class="form-text text-muted">AK为必填项。</small>
-        </div>
-        <div class="form-group">
-            <label for="queryStrInput">查询字符串:</label>
-            <input type="text" class="form-control" id="queryStrInput" name="queryStr" placeholder="查询字符串">
-        </div>
-        <div class="form-group">
-            <label for="pageInput">页码:</label>
-            <input type="number" class="form-control" id="pageInput" name="page" value="1">
-        </div>
-        <div class="form-group">
-            <label for="sizeInput">每页显示数量:</label>
-            <input type="number" class="form-control" id="sizeInput" name="size" value="10">
-        </div>
-        <div class="form-group">
-            <label for="fieldsInput">字段列表:</label>
-            <div>
+    <!-- 查询面板 -->
+    <div class="card p-4">
+        <h4 class="mb-4">Fofa 查询面板</h4>
+        <form id="fofaForm">
+            <div class="form-group">
+                <label for="akInput">AK (Access Key):</label>
+                <input type="text" class="form-control" id="akInput" name="ak" placeholder="请输入AK" required>
+                <small class="form-text text-muted">AK 为必填项。</small>
+            </div>
+            <div class="form-group">
+                <label for="queryStrInput">查询字符串:</label>
+                <input type="text" class="form-control" id="queryStrInput" name="queryStr"
+                       placeholder="请输入 FOFA 查询语句（如 title=?）" list="fofa-query-hints">
+            </div>
+
+            <!-- 只限国内 -->
+            <div class="form-group">
                 <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="ipCheckbox" name="fields[]" value="ip">
-                    <label class="custom-control-label" for="ipCheckbox">IP</label>
-                </div>
-                <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="portCheckbox" name="fields[]" value="port">
-                    <label class="custom-control-label" for="portCheckbox">端口号</label>
-                </div>
-                <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="protocolCheckbox" name="fields[]" value="protocol">
-                    <label class="custom-control-label" for="protocolCheckbox">协议</label>
-                </div>
-                <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="linkCheckbox" name="fields[]" value="link">
-                    <label class="custom-control-label" for="linkCheckbox">URL</label>
-                </div>
-                <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="domainCheckbox" name="fields[]" value="domain">
-                    <label class="custom-control-label" for="domainCheckbox">域名</label>
-                </div>
-                <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="titleCheckbox" name="fields[]" value="title">
-                    <label class="custom-control-label" for="titleCheckbox">标题</label>
-                </div>
-                <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="cityCheckbox" name="fields[]" value="city">
-                    <label class="custom-control-label" for="cityCheckbox">所在城市</label>
+                    <input type="checkbox" class="custom-control-input" id="onlyCN" name="onlyCN">
+                    <label class="custom-control-label" for="onlyCN">只限国内目标 (country=CN)</label>
                 </div>
             </div>
-        </div>
-        <button type="submit" class="btn btn-primary">查询</button>
-        <button type="button" class="btn btn-success ml-2" id="exportButton" disabled>导出</button>
-    </form>
 
-    <hr>
+            <!-- 字段列表 + 全选 -->
+            <div class="form-group">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <label class="mb-0">字段列表:</label>
+                    <button type="button" class="btn btn-sm btn-outline-secondary" id="selectAllBtn">全选</button>
+                </div>
+                <div class="d-flex flex-wrap">
+                    <!-- 复选框集合 -->
+                    <div class="custom-control custom-checkbox mr-3 mb-2">
+                        <input type="checkbox" class="custom-control-input field-check" id="ipCheckbox" name="fields[]" value="ip" checked>
+                        <label class="custom-control-label" for="ipCheckbox">IP</label>
+                    </div>
+                    <div class="custom-control custom-checkbox mr-3 mb-2">
+                        <input type="checkbox" class="custom-control-input field-check" id="portCheckbox" name="fields[]" value="port" checked>
+                        <label class="custom-control-label" for="portCheckbox">端口号</label>
+                    </div>
+                    <div class="custom-control custom-checkbox mr-3 mb-2">
+                        <input type="checkbox" class="custom-control-input field-check" id="protocolCheckbox" name="fields[]" value="protocol" checked>
+                        <label class="custom-control-label" for="protocolCheckbox">协议</label>
+                    </div>
+                    <div class="custom-control custom-checkbox mr-3 mb-2">
+                        <input type="checkbox" class="custom-control-input field-check" id="linkCheckbox" name="fields[]" value="link" checked>
+                        <label class="custom-control-label" for="linkCheckbox">URL</label>
+                    </div>
+                    <div class="custom-control custom-checkbox mr-3 mb-2">
+                        <input type="checkbox" class="custom-control-input field-check" id="domainCheckbox" name="fields[]" value="domain" checked>
+                        <label class="custom-control-label" for="domainCheckbox">域名</label>
+                    </div>
+                    <div class="custom-control custom-checkbox mr-3 mb-2">
+                        <input type="checkbox" class="custom-control-input field-check" id="titleCheckbox" name="fields[]" value="title" checked>
+                        <label class="custom-control-label" for="titleCheckbox">标题</label>
+                    </div>
+                    <div class="custom-control custom-checkbox mr-3 mb-2">
+                        <input type="checkbox" class="custom-control-input field-check" id="serverCheckbox" name="fields[]" value="server" checked>
+                        <label class="custom-control-label" for="serverCheckbox">网站 server</label>
+                    </div>
+                    <div class="custom-control custom-checkbox mr-3 mb-2">
+                        <input type="checkbox" class="custom-control-input field-check" id="regionCheckbox" name="fields[]" value="region" checked>
+                        <label class="custom-control-label" for="regionCheckbox">区域</label>
+                    </div>
+                    <div class="custom-control custom-checkbox mr-3 mb-2">
+                        <input type="checkbox" class="custom-control-input field-check" id="cityCheckbox" name="fields[]" value="city" checked>
+                        <label class="custom-control-label" for="cityCheckbox">所在城市</label>
+                    </div>
+                </div>
+            </div>
 
-    <table class="table table-striped mt-4" id="resultTable">
-        <thead>
-        <tr>
-            <th>IP</th>
-            <th>端口号</th>
-            <th>协议</th>
-            <th>URL</th>
-            <th>域名</th>
-            <th>标题</th>
-            <th>所在城市</th>
-        </tr>
-        </thead>
-        <tbody></tbody>
-    </table>
+            <button type="submit" class="btn btn-primary">查询</button>
+            <button type="button" class="btn btn-success ml-2" id="exportButton" disabled>导出</button>
+        </form>
+    </div>
+
+    <!-- 结果卡片区域 -->
+    <div class="row mt-4" id="resultCards"></div>
+
+    <!-- 分页 -->
+    <div class="pagination-container" id="paginationControls" style="display:none;">
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                <li class="page-item" id="prevPage"><a class="page-link" href="#">上一页</a></li>
+                <li class="page-item disabled">
+                    <span class="page-link" id="currentPage">1</span>
+                </li>
+                <li class="page-item" id="nextPage"><a class="page-link" href="#">下一页</a></li>
+            </ul>
+        </nav>
+    </div>
 </div>
 
+<datalist id="fofa-query-hints">
+    <option value="title="><option value="ip="><option value="port=">
+    <option value="domain="><option value="protocol="><option value="city=">
+    <option value="country="><option value="region="><option value="server=">
+    <option value="header="><option value="body="><option value="cert=">
+</datalist>
+
+<script src="jquery-3.6.0.min.js"></script>
+<script src="xlsx.full.min.js"></script>
 <script>
-$(document).ready(function () {
+$(function () {
     let ak = sessionStorage.getItem('ak');
-    if (ak) {
-        $('#akInput').val(ak);
-    }
+    if (ak) $('#akInput').val(ak);
 
-    window.queryResults = []; // 全局变量，用于存储查询结果
+    window.queryResults = [];
+    let currentPage = 1;
 
-    function fillTable(data) {
-        const tbody = $('#resultTable tbody');
-        tbody.empty(); // 清空tbody内容
+    /* ---------- 一键全选 ---------- */
+    $('#selectAllBtn').on('click', function () {
+        const allChecked = $('.field-check:checked').length === $('.field-check').length;
+        $('.field-check').prop('checked', !allChecked);
+        $(this).text(allChecked ? '全选' : '取消全选');
+    });
 
-        data.forEach(item => {
-            let row = `<tr>`;
-            const fields = ['ip', 'port', 'protocol', 'link', 'domain', 'title', 'city'];
-            fields.forEach(field => {
-                console.log(`Processing field: ${field}`); // 添加此行
-                console.log(`Item:`, item); // 添加此行
-                console.log(item[field])
-                row += `<td>${item[field] || 'N/A'}</td>`;
-            });
-            row += `</tr>`;
-            tbody.append(row);
+    /* ---------- 填充卡片 ---------- */
+    function fillCards(data) {
+        const $box = $('#resultCards');
+        $box.empty();
+        data.forEach(d => {
+            const card = `
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card result-card h-100">
+                    <div class="card-body d-flex p-0">
+                        <div class="p-3 d-flex flex-column align-items-center justify-content-center">
+                            <div class="ip-block mb-1">${d.ip || 'N/A'}</div>
+                            <small class="text-muted" style="font-size:0.9rem;">${d.server || 'N/A'}</small>
+                        </div>
+                        <div class="flex-fill p-3">
+                            <p class="mb-1 text-truncate" title="${d.port||'N/A'}"><strong>端口:</strong> ${d.port||'N/A'}</p>
+                            <p class="mb-1 text-truncate" title="${d.protocol||'N/A'}"><strong>协议:</strong> ${d.protocol||'N/A'}</p>
+                            <p class="mb-1 small" style="word-break:break-all;line-height:1.2;max-height:2.4em;overflow:hidden;">
+                                <strong>URL:</strong> ${d.link||'N/A'}
+                            </p>
+                            <p class="mb-1 text-truncate" title="${d.domain||'N/A'}"><strong>域名:</strong> ${d.domain||'N/A'}</p>
+                            <p class="mb-1 text-truncate" style="max-width:180px;" title="${d.title||'N/A'}"><strong>标题:</strong> ${d.title||'N/A'}</p>
+                            <p class="mb-1 text-truncate" title="${d.region||'N/A'}"><strong>区域:</strong> ${d.region||'N/A'}</p>
+                            <p class="mb-0 text-truncate" title="${d.city||'N/A'}"><strong>城市:</strong> ${d.city||'N/A'}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>`;
+            $box.append(card);
         });
     }
 
-    $('#fofaForm').on('submit', function (e) {
-        e.preventDefault();
-        const formData = $(this).serializeArray();
+    /* ---------- 查询 ---------- */
+    function performQuery(page) {
         const params = {};
-
-        // 构建fields参数
-        const checkedFields = [];
-        ['ip', 'port', 'protocol', 'link', 'domain', 'title', 'city'].forEach(field => {
-            if ($('#' + field + 'Checkbox').is(':checked')) {
-                checkedFields.push(field);
-            }
+        const checked = [];
+        params.ak = $('#akInput').val().trim();
+        $('.field-check:checked').each(function () {
+            checked.push($(this).val());
         });
-        params['fields'] = encodeURIComponent(checkedFields.join(','));
+        params.fields = encodeURIComponent(checked.join(','));
+        // 基础查询语句
+        let baseQuery = $('#queryStrInput').val().trim();
+        // 如需限定国内
+        if ($('#onlyCN').is(':checked')) {
+            baseQuery = baseQuery ? `${baseQuery}&&country=CN` : 'country=CN';
+        }
+        params.queryStr = encodeURIComponent(baseQuery);
 
-        // 处理其他表单数据
-        formData.filter(item => item.name !== 'fields[]').forEach(item => {
-            params[item.name] = encodeURIComponent(item.value);
-        });
-
+        params.page = page;
+        params.size = 18;   // 每页 18 条
         $.ajax({
             url: 'http://127.0.0.1:83/api',
             type: 'GET',
             data: params,
-            success: function (response) {
-                console.log(response);
-                fillTable(response.finalResults); // 使用finalResults
-                window.queryResults = response.finalResults; // 存储查询结果
+            success: res => {
+                fillCards(res.finalResults);
+                window.queryResults = res.finalResults;
                 sessionStorage.setItem('ak', $('#akInput').val());
                 $('#exportButton').prop('disabled', false);
+                $('#paginationControls').show();
+                $('#currentPage').text(page);
+                currentPage = page;
             },
-            error: function (jqXHR, textStatus, errorThrown) {
-                if (jqXHR.status === 400) {
-                    try {
-                        const responseText = JSON.parse(jqXHR.responseText);
-                        alert('请求失败: ' + responseText.error);
-                    } catch (e) {
-                        alert('请求失败: ' + jqXHR.responseText);
-                    }
-                } else {
-                    alert('请求失败: ' + textStatus + ' - ' + errorThrown);
+            error: xhr => {
+                try {
+                    alert('请求失败: ' + (JSON.parse(xhr.responseText).error || xhr.responseText));
+                } catch {
+                    alert('请求失败: ' + xhr.statusText);
                 }
             }
         });
+    }
+
+    /* ---------- 事件 ---------- */
+    $('#fofaForm').on('submit', e => { e.preventDefault(); currentPage = 1; performQuery(1); });
+    $('#prevPage').on('click', e => { e.preventDefault(); if (currentPage > 1) performQuery(currentPage - 1); });
+    $('#nextPage').on('click', e => { e.preventDefault(); performQuery(currentPage + 1); });
+
+    $('#exportButton').click(() => {
+        const list = window.queryResults;
+        const headers = ['ip','port','protocol','link','domain','title','server','region','city'];
+        const ws = XLSX.utils.json_to_sheet(list, {header: headers});
+        const wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, '数据表');
+        const bin = XLSX.write(wb, {bookType: 'xlsx', type: 'binary'});
+        const blob = new Blob([s2ab(bin)], {type: 'application/octet-stream'});
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'fofa_data_' + new Date().toISOString().slice(0, 10) + '.xlsx';
+        document.body.appendChild(a); a.click(); document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        alert('导出成功!');
     });
 
-// 导出按钮点击事件
-$('#exportButton').click(function () {
-    // 获取查询结果
-    const resultEntityList = window.queryResults;
-
-    // 定义要导出的列名
-    const columnNames = ['ip', 'port', 'protocol', 'link', 'domain', 'title', 'city'];
-
-    // 创建工作簿
-    const workbook = XLSX.utils.book_new();
-
-    // 创建工作表
-    const worksheet = XLSX.utils.json_to_sheet(resultEntityList, { header: columnNames });
-
-    // 将工作表添加到工作簿中
-    XLSX.utils.book_append_sheet(workbook, worksheet, '数据表');
-
-    // 生成二进制文件
-    const binaryFile = XLSX.write(workbook, { bookType: 'xlsx', type: 'binary' });
-
-    // 转换为 Blob
-    const blob = new Blob([s2ab(binaryFile)], { type: 'application/octet-stream' });
-
-    // 创建下载链接
-    const url = URL.createObjectURL(blob);
-
-    // 创建 a 标签以触发下载
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'fofa_data_' + new Date().toISOString() + '.xlsx';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-
-    // 成功提示
-    alert('导出成功!');
-});
-
-// 将二进制字符串转换为 ArrayBuffer
-function s2ab(s) {
-    const buf = new ArrayBuffer(s.length);
-    const view = new Uint8Array(buf);
-    for (let i = 0; i < s.length; i++) {
-        view[i] = s.charCodeAt(i) & 0xFF;
+    function s2ab(s) {
+        const buf = new ArrayBuffer(s.length), view = new Uint8Array(buf);
+        for (let i = 0; i < s.length; i++) view[i] = s.charCodeAt(i) & 0xFF;
+        return buf;
     }
-    return buf;
-}
 });
 </script>
 </body>
