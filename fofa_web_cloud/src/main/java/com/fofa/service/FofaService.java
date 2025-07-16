@@ -131,6 +131,12 @@ public class FofaService {
                     case "title":
                         resultEntity.setTitle(decodeHtmlEntities(value));
                         break;
+                    case "server":
+                        resultEntity.setServer(value);
+                        break;
+                    case "region":
+                        resultEntity.setRegion(value);
+                        break;
                     case "city":
                         resultEntity.setCity(value);
                         break;
